@@ -2,9 +2,6 @@ const empdb=require('../model/empModel');
 let employeeSerive={}
 const validator=require('../utilities/validator');
 
-
-
-
 //get details of all employees
 employeeSerive.getAllEmployees=()=>{
     return empdb.getAllEmployees().then(data=>{
