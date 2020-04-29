@@ -83,4 +83,18 @@ eventService.updateEvent = (req, res) => {
     });
 };
 
+eventService.getEventByDate = (date) => {
+
+    return eventdb.findByDate(date).then(data => {
+        if (data) {
+            return data;
+        }
+        else {
+            let err = new Error("Sorry!! There is no Event above this date");
+            err.status = 403;
+            throw err;
+        };
+    });
+};
+
 module.exports = eventService;

@@ -51,7 +51,32 @@ eventModel.addEvent = (eventObj) => {
 }
 
 eventModel.updateEvent = (req) => {
-    return eventModel.addEvent(req.body);
+    return dbModel.getEventCollection().then(model => {
+        return model.findOneAndUpdate({ "_id": req.body._id }, req.body,
+            { new: true }).then(data => {
+                console.log(data);
+                if (data) {
+                    return data._id;
+                }
+                else {
+                    return null;
+                }
+            })
+    })
+};
+
+eventModel.findByDate = (date) => {
+    return dbModel.getEventCollection().then(model => {
+        return model.find({ eventDateTime: { $gte: date } }).then(data => {
+            console.log(data);
+            if (data) {
+                return data;
+            }
+            else {
+                return null;
+            }
+        })
+    })
 };
 
 module.exports = eventModel;

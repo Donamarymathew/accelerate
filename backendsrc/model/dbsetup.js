@@ -41,7 +41,7 @@ const EventDatabase=[
         "eventId": 3,
         "title": "yoga",
         "description": "yoga class",
-        "eventDate": "2020-09-01 09:01:15",
+        "eventDateTime": "2020-09-01 09:01:15",
         "empId": "1",
         "rewardPoints": "5"
     },
@@ -53,7 +53,7 @@ const EventDatabase=[
         "eventId": 2,
         "title": "cycle",
         "description": "cycle class",
-        "eventDate": "2020-09-01 09:01:15",
+        "eventDateTime": "2020-09-01 09:01:15",
         "empId": "1",
         "rewardPoints": "10"
     },
@@ -65,7 +65,7 @@ const EventDatabase=[
         "eventId": 1,
         "title": "kungfu",
         "description": "fight class",
-        "eventDate": "2020-09-01 09:01:15",
+        "eventDateTime": "2020-09-01 09:01:15",
         "empId": "1",
         "rewardPoints": "10"
     }
