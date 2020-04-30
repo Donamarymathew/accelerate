@@ -22,13 +22,17 @@ router.get('/', (req, res, next) => {
 
 
 //get event details based on eventId
-router.get('/:id', (req, res, next) => {
-    console.log(req.params.id);
+router.post('/:id', (req, res, next) => {
     eventService.getEventById(req.params.id).then((response) => {
         res.json(response);
     }).catch((err) => next(err))
 })
 
+router.get('/:date', (req, res, next) => {
+    eventService.getEventByDate(req.params.date).then((response) => {
+        res.json(response);
+    }).catch((err) => next(err))
+});
 
 //add Event
 router.post('/', (req, res, next) => {

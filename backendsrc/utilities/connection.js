@@ -42,8 +42,8 @@ var eventSchema = Schema({
             type: String
         }
     },
-    eventDate: {
-        type: String
+    eventDateTime: {
+        type: Date
     },
     empId: {
         type: String
@@ -55,7 +55,7 @@ var eventSchema = Schema({
 
 
 collection.getEventCollection = () => {
-    return Moongoose.connect('mongodb://localhost:27017/EventDB', { useNewUrlParser: true, useUnifiedTopology: true }).then((database) => {
+    return Moongoose.connect('mongodb://localhost:27017/EventDB', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }).then((database) => {
         return database.model('EventCollection', eventSchema);
     }).catch(() => {
         let err = new Error("Could not connect to employee Collection Database");
