@@ -5,14 +5,14 @@ const EmployeeDatabase=[
         staffId:100001,
         firstName:"Noble",
         lastName:"Jose",
-        password:"abcd1234"
+        password:"$2b$10$a2J2hoJ1.Ksaf2vEvmrI1eBPvBmMRoII7dfVzjJ1aqXLOv8UvEdeu"
     },
     {
        
-        staffId:100002,
-        firstName:"Varshae",
-        lastName:"M",
-        password:"vxyz1234"
+         staffId:100002,
+        firstName:"Niharika",
+        lastName:"Banerjee",
+        password: "$2b$10$2pChY593J36T1eO1HBWuYutW2cM39yqeeCfJwc/56XITuehVrcUfm"
     }
 ]
 
