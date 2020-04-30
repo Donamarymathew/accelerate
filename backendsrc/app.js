@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 
 app.listen(4000, () => {
-    console.log('listenig on 4000');
+    console.log('listening on 4000');
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
