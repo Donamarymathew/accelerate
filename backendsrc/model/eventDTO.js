@@ -5,7 +5,7 @@ class EventDTO {
         this.title = obj.title;
         this.description = obj.description;
         this.location = obj.location;
-        this.eventDate = obj.eventDate;
+        this.eventDateTime = obj.eventDateTime;
         this.empId = obj.empId;
         this.rewardPoints = obj.rewardPoints;
     }

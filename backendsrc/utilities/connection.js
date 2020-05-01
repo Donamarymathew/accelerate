@@ -19,7 +19,6 @@ collection.getEmployeeCollection = () => {
         let err = new Error("Could not connect to employee Collection Database");
         err.status = 500;
         throw err;
-
     })
 }
 

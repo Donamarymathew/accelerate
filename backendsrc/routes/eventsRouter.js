@@ -22,13 +22,14 @@ router.get('/', (req, res, next) => {
 
 
 //get event details based on eventId
-router.post('/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
     eventService.getEventById(req.params.id).then((response) => {
         res.json(response);
     }).catch((err) => next(err))
 })
 
-router.get('/:date', (req, res, next) => {
+router.get('/date/:date', (req, res, next) => {
+    console.log(req.params.date);
     eventService.getEventByDate(req.params.date).then((response) => {
         res.json(response);
     }).catch((err) => next(err))
@@ -36,7 +37,7 @@ router.get('/:date', (req, res, next) => {
 
 //add Event
 router.post('/', (req, res, next) => {
-    const newEvent = new EventDTO(req.body);
+    var newEvent = new EventDTO(req.body);
     eventService.addEvent(newEvent).then((response) => {
         res.json(response.message);
     }).catch((err) => next(err))
@@ -45,7 +46,7 @@ router.post('/', (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
     eventService.deleteEvent(req.params.id).then((response) => {
-        res.json(response.message);
+        res.json(response);
     }).catch((err) => next(err))
 })
 

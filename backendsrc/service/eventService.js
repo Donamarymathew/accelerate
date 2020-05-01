@@ -2,7 +2,7 @@ const eventdb = require('../model/eventModel');
 let eventService = {}
 const validator = require('../utilities/validator');
 
-//get details of all employees
+//get details of all events
 eventService.getAllEvents = () => {
     return eventdb.getAllEvents().then(data => {
         if (data == null) {
@@ -18,11 +18,10 @@ eventService.getAllEvents = () => {
 
 //get detail of an event based on eventId
 
-eventService.getEventById = (_id) => {
-    console.log(_id);
-    return eventdb.findEvent(_id).then((event) => {
+eventService.getEventById = (eventId) => {
+    return eventdb.findEventId(eventId).then((event) => {
         if (event == null) {
-            let err = new Error("Employee details not available!! Please Register");
+            let err = new Error("Event details not available!! Please Register");
             err.status = 404;
             throw err;
         } else {
@@ -33,29 +32,38 @@ eventService.getEventById = (_id) => {
 
 
 //add event
-eventService.addEvent = (eventObj) => {
-    return eventdb.addEvent(eventObj).then((data) => {
-        if (data) {
-            return { "message": "Successfully add Event: " };
-        }
-        else {
-            let err = new Error("Event Details not Inserted");
-            err.status = 500;
-            throw err;
-        }
-    })
-}
-//delete event
-eventService.deleteEvent = (_id) => {
-    return eventdb.findEvent(_id).then(object => {
-        if (object == null) {
-            let err = new Error("Employee not registered!!");
+eventService.addEvent = (newEvent) => {
+    return eventdb.findEventId(newEvent.eventId).then(object => {
+        if (object != null) {
+            let err = new Error("Event already Exist");
             err.status = 404;
             throw err;
         } else {
-            return eventdb.deleteEvent(_id).then(data => {
+            return eventdb.addEvent(newEvent).then((data) => {
                 if (data) {
-                    return { "message": `Deleted Event with ID: ${_id}` };
+                    return { "message": "Successfully added Event with ID : " + data };
+                }
+                else {
+                    let err = new Error("Event Details not Inserted");
+                    err.status = 500;
+                    throw err;
+                }
+            })
+        }
+    });
+};
+
+//delete event
+eventService.deleteEvent = (eventId) => {
+    return eventdb.findEventId(eventId).then(object => {
+        if (object == null) {
+            let err = new Error("Event not Registered!!");
+            err.status = 404;
+            throw err;
+        } else {
+            return eventdb.deleteEvent(eventId).then(data => {
+                if (data) {
+                    return { "message": "Event Deleted Successfully" };
                 }
                 else {
                     let err = new Error("Failed to delete the Event");
@@ -70,21 +78,26 @@ eventService.deleteEvent = (_id) => {
 
 //update Event
 eventService.updateEvent = (req, res) => {
-
-    return eventdb.updateEvent(req).then(data => {
-        if (data) {
-            return { "message": "Successfully updateded Event" }
-        }
-        else {
-            let err = new Error("Sorry!! Failed to update event");
-            err.status = 403;
+    return eventdb.findEventId(req.body.eventId).then(object => {
+        if (object == null) {
+            let err = new Error("Event not Registered!!");
+            err.status = 404;
             throw err;
+        } else {
+            return eventdb.updateEvent(req).then(data => {
+                if (data) {
+                    return { "message": "Successfully updateded Event" }
+                }
+                else {
+                    let err = new Error("Sorry!! Failed to update event");
+                    err.status = 403;
+                    throw err;
+                };
+            });
         };
     });
 };
-
 eventService.getEventByDate = (date) => {
-
     return eventdb.findByDate(date).then(data => {
         if (data) {
             return data;
